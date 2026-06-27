@@ -1,7 +1,7 @@
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
-
+from evaluate_model import evaluate_model, print_metrics
 from data_preprocessing import load_data, split_features_target, split_data
 
 
@@ -23,10 +23,8 @@ if __name__ == "__main__":
 
     model = train_model(X_train, y_train)
 
-    y_pred = model.predict(X_test)
-
-    print(confusion_matrix(y_test, y_pred))
-    print(classification_report(y_test, y_pred))
+    metrics = evaluate_model(model, X_test, y_test)
+    print_metrics(metrics)
 
     joblib.dump(model, "models/fraud_model.pkl")
     print("Model saved to models/fraud_model.pkl")
