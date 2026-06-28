@@ -1,5 +1,9 @@
+from unittest.mock import patch, MagicMock
+
+with patch("src.predict.load_model", return_value=MagicMock()):
+    from api.main import app
+
 from fastapi.testclient import TestClient
-from api.main import app
 
 client = TestClient(app)
 
